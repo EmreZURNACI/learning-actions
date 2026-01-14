@@ -1,0 +1,35 @@
+name: Learning Github Actions - 2
+
+on:
+      push:
+            branches: ["master"]
+      pull_request:
+            branches: ["master"]
+      workflow_dispatch:
+
+jobs:
+      Job1:
+            name: "Job1"
+            runs-on: ["ubuntu-latest", windows-latest]
+            continue-on-error: true
+            outputs:
+                  problem: ${{ steps.Job1-step1.outputs.problem }}
+            steps:
+                  - name: step1
+                    id: Job1-step1
+                    shell: bash
+                    run: echo "problem=evet" >> "$GITHUB_OUTPUT"
+
+      Job2:
+            if: needs.Job1.outputs.problem == 'evet'
+
+            name: "Job2"
+            runs-on: ["ubuntu-latest", windows-latest]
+
+            needs: ["Job1"]
+
+            steps:
+                  - name: step1
+                    id: Job1-step1
+                    shell: sh
+                    run: echo "HATA"
