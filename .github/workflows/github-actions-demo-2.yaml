@@ -22,7 +22,7 @@ jobs:
                   - name: step1
                     id: Job1-step1
                     shell: bash
-                    run: echo "problem=evet" >> "$GITHUB_OUTPUT"
+                    run: echo "problem=hayır" >> "$GITHUB_OUTPUT"
 
       Job2:
             if: needs.Job1.outputs.problem == 'evet'
